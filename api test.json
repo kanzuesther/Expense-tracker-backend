@@ -373,8 +373,29 @@
 				{
 					"name": "add category",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"youtube\",\r\n    \"icon\":\"string\",\r\n     \"parent\":null\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-category",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-category"
+							]
+						}
 					},
 					"response": []
 				}
@@ -382,7 +403,99 @@
 		},
 		{
 			"name": "cash reserves",
-			"item": []
+			"item": [
+				{
+					"name": "add cash reserve",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"cash\",\r\n    \"balance\":10000,\r\n    \"currency\":\"dollars\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/get-cashreserves",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-cashreserves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cash reserve",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"cash\",\r\n    \"balance\":10000,\r\n    \"currency\":\"dollars\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/delete-cashreserves/66c5f25878c29f1354e0f428",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"delete-cashreserves",
+								"66c5f25878c29f1354e0f428"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete cash reserve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"cash\",\r\n    \"balance\":10000,\r\n    \"currency\":\"dollars\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-cashreserves",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-cashreserves"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
