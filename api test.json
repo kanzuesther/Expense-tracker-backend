@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "a51b48fa-1ec7-4297-9803-9459052864e6",
+		"name": "expense_tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Income\",\r\n    \"amount\":\"5000\",\r\n    \"category\":\"food\",\r\n    \"description\":\"my income\",\r\n    \"date\":\"09/09/24\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-income",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Transaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/get-income",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/delete-income/66bf6e2f5ca8447e3a501615",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"delete-income",
+								"66bf6e2f5ca8447e3a501615"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "expenses",
+			"item": [
+				{
+					"name": "Create Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Expense\",\r\n    \"amount\":\"1000\",\r\n    \"category\":\"transport\",\r\n    \"description\":\"my expense\",\r\n    \"date\":\"09/10/24\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-expenses",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Expense",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/get-expenses",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Expense",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/delete-expense/66b60c15a6e44e6e2b181b59",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"delete-expense",
+								"66b60c15a6e44e6e2b181b59"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/login",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reminder",
+			"item": [
+				{
+					"name": "add reminder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy food\",\r\n    \"amount\":2000,\r\n    \"date\":\"09/09/05\",\r\n    \"reminder_cycle\":\"monthly\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-reminder",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-reminder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reminders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy food\",\r\n    \"amount\":2000,\r\n    \"date\":\"09/09/05\",\r\n    \"reminder_cycle\":\"monthly\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/get-reminder",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-reminder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete reminder",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy food\",\r\n    \"amount\":2000,\r\n    \"date\":\"09/09/05\",\r\n    \"reminder_cycle\":\"monthly\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/delete-reminder/66c5c58356c6b8077eafcd30",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"delete-reminder",
+								"66c5c58356c6b8077eafcd30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "budget",
+			"item": [
+				{
+					"name": "add budget",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy phone\",\r\n    \"amount\":20000,\r\n    \"currency\":\"dollars\",\r\n    \"budget_cycle\":\"in a year\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/add-budget",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"add-budget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get budget",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy phone\",\r\n    \"amount\":20000,\r\n    \"currency\":\"dollars\",\r\n    \"budget_cycle\":\"in a year\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/get-budget",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-budget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete budget",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"buy phone\",\r\n    \"amount\":20000,\r\n    \"currency\":\"dollars\",\r\n    \"budget_cycle\":\"in a year\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/delete-budget/66c5cb13f16018eecbbb9d62",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"delete-budget",
+								"66c5cb13f16018eecbbb9d62"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "add category",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cash reserves",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_URL",
+			"value": "http://localhost:5000",
+			"type": "default"
+		}
+	]
+}

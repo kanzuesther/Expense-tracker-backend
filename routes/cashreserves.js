@@ -1,11 +1,11 @@
 const router= require('express').Router()
-const { addBudget,getBudget, deleteBudget } = require('../controllers/budget')
+const { addCashReservers,getCashReservers, deleteCashReservers } = require('../controllers/cashreserves')
 
 
 
 
- router.post('/add-budget',addBudget)
-  .get('/get-budget',getBudget)
-  .delete('/delete-budget/:id',deleteBudget)
+ router.post('/add-cashreserves',addCashReserves)
+  .get('/getcashreserves-',getCashReserves)
+  .delete('/delete-cashreserves/:id',deleteCashReserves)
 
 module.exports = router
