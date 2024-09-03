@@ -15,6 +15,10 @@ const CashReservesSchema = new mongoose.Schema({
     currency:{
         type:String,
         required:false
+    },
+    color: {
+        type: String,
+        required: false
     }
 },{timestamps:true}
 )

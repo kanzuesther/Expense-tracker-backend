@@ -1,33 +1,32 @@
-const express = require('express')
+const express = require('express');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const cors = require('cors');
-const { db } = require('./db/db');
-const { readdirSync } = require('fs')
-const app = express();
+const cookieParser = require('cookie-parser');
+const { readdirSync } = require('fs');
+const UserRouter = require('./routes/users.js');
+const db = require('./db/db.js');
 
-
-require('dotenv').config()
-
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 
 //middlewears
-app.use(express.json())
-app.use(cors())
+const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello world')
-})
+app.use(express.json())
+app.use(cookieParser())
+app.use(cors({
+    origin:["http://localhost:5173"],
+    credentials:true
+}))
+app.use('/auth',UserRouter)
 
 //routes
 readdirSync('./routes').map((route) => {
     app.use('/api/v1/', require('./routes/' + route)) 
 })
 
-const server = () => {
-    db()
-    app.listen(PORT, () => {
-        console.log('listening to port:', PORT)
+mongoose.connect('mongodb://127.0.0.1:27017/expense-tracker')
 
-    })
-}
-
-server()
+app.listen(PORT,()=>{
+    console.log(`Server is running ${PORT}`)
+})
