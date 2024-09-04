@@ -54,7 +54,7 @@ exports.addCategory= async (req, res) => {
     })
     try {
         //validations
-        if (!name || !parent || !icon) {
+        if (!name || !icon) {
             return res.status(400).json({ message: 'All fields are required!' })
         }
         

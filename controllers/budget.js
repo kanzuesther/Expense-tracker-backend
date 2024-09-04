@@ -2,19 +2,19 @@ const BudgetSchema = require("../models/BudgetModel")
 
 exports.addBudget= async (req, res) => {
     console.log(req.body)
-    const { amount, currency, budget_cycle, name } = req.body
+    const { amount, currency, cycle, name } = req.body
 
     const budget = BudgetSchema({
         name,
         amount,
         currency,
-        budget_cycle
+        cycle
     })
     try {
         //validations
-        if (!name || !amount || !currency || !budget_cycle) {
-            return res.status(400).json({ message: 'All fields are required!' })
-        }
+        // if (!name || !amount || !currency || !cycle) {
+        //     return res.status(400).json({ message: 'All fields are required!' })
+        // }
        await budget.save();
        res.status(200).json({"message":"budget added sucessfully","data":budget})
     } catch (error) {

@@ -16,7 +16,7 @@ const BudgetSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    budget_cycle: {
+    cycle: {
         type: String,
         required: true
     }
