@@ -2,16 +2,17 @@ const CashReservesSchema = require("../models/CashReservesModel")
 
 exports.addCashReserves= async (req, res) => {
     console.log(req.body)
-    const { balance, currency, name } = req.body
+    const { balance, currency, name, color } = req.body
 
     const cashreserves = CashReservesSchema({
         name,
         balance,
         currency,
+        color
     })
     try {
         //validations
-        if (!name || !balance || !currency) {
+        if (!name || !currency) {
             return res.status(400).json({ message: 'All fields are required!' })
         }
        await cashreserves.save();
