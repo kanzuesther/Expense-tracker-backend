@@ -21,9 +21,22 @@ exports.addExpense = async (req, res) => {
         if (amount <= 0) {
             return res.status(400).json({ message: 'Amount must be a postive number!' })
         }
-        await expense.save()
-        await expense.populate("sourceAccount").populate("category");
-        res.status(200).json({ message: 'Expense Added', data: expense })
+        expense.save()
+            .then(async (data) => {
+                console.log("Expense saved successfully, data");
+                console.log(data);
+
+                await data.populate("sourceAccount")
+                
+                await data.populate("category");
+
+                res.status(200).json({ message: 'Expense Added', data: expense })
+            })
+            .catch((error) => {
+                console.log("Error saving transaction, error")
+                console.log(error);
+            })
+        // await expense.populate("sourceAccount").populate("category");
 
     } catch (error) {
         res.status(500).json({ message: error.toString() })

@@ -1,4 +1,4 @@
-const router= require('express').Router()
+const router= require ('express').Router()
 const { addBudget,getBudget, deleteBudget } = require('../controllers/budget')
 
 
