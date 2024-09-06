@@ -19,6 +19,17 @@ const BudgetSchema = new mongoose.Schema({
     cycle: {
         type: String,
         required: true
+    },
+    account:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"CashReserves",
+        required:true
+    },
+    category:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:false,
+        ref:"Category",
+
     }
 },{timestamps:true}
 )
