@@ -2,7 +2,7 @@ const BudgetSchema = require("../models/BudgetModel")
 
 exports.addBudget= async (req, res) => {
     console.log(req.body)
-    const { amount, currency, cycle, name, account ,category} = req.body
+    const { amount, currency, cycle, name,account ,category} = req.body
 
     const budget = BudgetSchema({
         name,

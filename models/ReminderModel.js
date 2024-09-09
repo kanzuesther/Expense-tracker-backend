@@ -19,7 +19,12 @@ const ReminderSchema = new mongoose.Schema({
     reminder_cycle: {
         type: String,
         required: true
-    }
+    },
+    cash_reserve:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"CashReserves",
+        required:true
+    },
 },{timestamps:true}
 )
 
