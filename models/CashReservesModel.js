@@ -19,6 +19,10 @@ const CashReservesSchema = new mongoose.Schema({
     color: {
         type: String,
         required: false
+    },
+    icon: {
+        type: String,
+        required: false
     }
 },{timestamps:true}
 )
