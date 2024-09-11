@@ -7,6 +7,8 @@ const { readdirSync } = require('fs');
 const UserRouter = require('./routes/users.js');
 const db = require('./db/db.js');
 
+dotenv.config();
+
 const PORT = process.env.PORT || 5000;
 
 //middlewears
@@ -25,7 +27,8 @@ readdirSync('./routes').map((route) => {
     app.use('/api/v1/', require('./routes/' + route)) 
 })
 
-mongoose.connect('mongodb://127.0.0.1:27017/expense-tracker')
+console.log(`Mongo url: ${process.env.MONGO_URL}`)
+mongoose.connect(process.env.MONGO_URL)
 
 app.listen(PORT,()=>{
     console.log(`Server is running ${PORT}`)
