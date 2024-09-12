@@ -9,7 +9,7 @@ const CashReservesSchema = new mongoose.Schema({
         maxlength: 50
     },
     balance:{
-        type: String,
+        type: Number,
         required: true
     },
     currency:{
