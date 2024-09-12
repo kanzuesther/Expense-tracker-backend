@@ -59,14 +59,13 @@ exports.deleteReminder = async (req, res) => {
         })
 }
 
-exports.deleteReminder = async (req, res) => {
+exports.deleteReminders = async (req, res) => {
     console.log(req.body)
-    const {selectedIds } = req.body
+    const { selectedIds } = req.body
 
-    selectedIds.forEach(async(id)=>{
+    selectedIds.forEach(async (id) => {
         await ReminderSchema.findByIdAndDelete(id)
     })
-    .then((reminder) => {
-        res.status(200).json({ message: 'Reminder Deleted', data: reminder })
-    })
-    }
+
+    res.status(200).json({ message: 'Reminders Deleted' });
+}

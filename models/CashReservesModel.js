@@ -8,8 +8,8 @@ const CashReservesSchema = new mongoose.Schema({
         trim: true,
         maxlength: 50
     },
-    balance: {
-        type: String,
+    balance:{
+        type: Number,
         required: true
     },
     currency: {

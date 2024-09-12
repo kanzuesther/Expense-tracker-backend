@@ -1,4 +1,8 @@
 const TransactionSchema = require("../models/TransactionModel")
+const CashReserveSchema = require("../models/CashReservesModel")
+
+
+
 
 exports.addExpense = async (req, res) => {
     console.log(req.body)
@@ -26,8 +30,12 @@ exports.addExpense = async (req, res) => {
                 console.log("Expense saved successfully, data");
                 console.log(data);
 
+                const sourceAccount = await CashReserveSchema.findById(expense.sourceAccount);
+                sourceAccount.balance += (expense.type === 'income' ? 1 : -1) * expense.amount;
+                await sourceAccount.save();
+
                 await data.populate("sourceAccount")
-                
+
                 await data.populate("category");
 
                 res.status(200).json({ message: 'Expense Added', data: expense })
@@ -59,8 +67,12 @@ exports.getExpense = async (req, res) => {
 exports.deleteExpense = async (req, res) => {
     const { id } = req.params;
     TransactionSchema.findByIdAndDelete(id)
-        .then((expense) => {
+        .then(async(expense) => {
             res.status(200).json({ message: 'Expense Deleted', data: expense })
+
+            const sourceAccount = await CashReserveSchema.findById(expense.sourceAccount);
+            sourceAccount.balance += (expense.type === 'income' ? -1 : 1) * expense.amount;
+            await sourceAccount.save();
         })
         .catch((error) => {
             res.status(500).json({ message: 'Server Error', error: error.toString() })

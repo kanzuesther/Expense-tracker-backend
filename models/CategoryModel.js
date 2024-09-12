@@ -17,22 +17,25 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    color:{
+        type:String,
+        required:true,
+    },
     createDate: {
         type: Date,
-        default: Date.now,  // Set default value to the current date and time
+        default: Date.now,
     },
     lastUpdate: {
         type: Date,
-        default: Date.now,  // Set default value to the current date and time
+        default: Date.now,
     },
     deleteDate: {
-        type: Date,  // No default, not required
+        type: Date,
     },
     is_deleted: {
         type: Boolean,
-        default: false,  // Default value is false
+        default: false,
     },
-}, { timestamps: true }
-)
+}, { timestamps: true })
 
 module.exports = mongoose.model('Category', CategorySchema);

@@ -45,16 +45,17 @@ var upload = multer({
 
 exports.addCategory= async (req, res) => {
     console.log(req.body)
-    const { parent,icon, name } = req.body
+    const { parent,icon, name, color} = req.body
 
     const category = CategorySchema({
         name,
         parent,
         icon,
+        color,
     })
     try {
         //validations
-        if (!name || !icon) {
+        if (!name || !icon||!color) {
             return res.status(400).json({ message: 'All fields are required!' })
         }
         
