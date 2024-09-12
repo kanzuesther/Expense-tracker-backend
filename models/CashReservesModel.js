@@ -8,13 +8,13 @@ const CashReservesSchema = new mongoose.Schema({
         trim: true,
         maxlength: 50
     },
-    balance:{
+    balance: {
         type: String,
         required: true
     },
-    currency:{
-        type:String,
-        required:false
+    currency: {
+        type: String,
+        required: false
     },
     color: {
         type: String,
@@ -23,8 +23,23 @@ const CashReservesSchema = new mongoose.Schema({
     icon: {
         type: String,
         required: false
-    }
-},{timestamps:true}
+    },
+    createDate: {
+        type: Date,
+        default: Date.now,  // Set default value to the current date and time
+    },
+    lastUpdate: {
+        type: Date,
+        default: Date.now,  // Set default value to the current date and time
+    },
+    deleteDate: {
+        type: Date,  // No default, not required
+    },
+    is_deleted: {
+        type: Boolean,
+        default: false,  // Default value is false
+    },
+}, { timestamps: true }
 )
 
 module.exports = mongoose.model('CashReserves', CashReservesSchema);

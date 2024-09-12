@@ -2,14 +2,16 @@ const CashReservesSchema = require("../models/CashReservesModel")
 
 exports.addCashReserves = async (req, res) => {
     console.log(req.body)
-    const { balance, currency, name, color, icon } = req.body
+    const { balance, currency, name, color, icon, createDate, lastUpdate } = req.body
 
     const cashreserves = CashReservesSchema({
         name,
         balance,
         currency,
         color,
-        icon
+        icon,
+        createDate,
+        lastUpdate
     })
     try {
         //validations
