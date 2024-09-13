@@ -78,3 +78,14 @@ exports.deleteExpense = async (req, res) => {
             res.status(500).json({ message: 'Server Error', error: error.toString() })
         })
 }
+
+exports.deleteExpenses= async (req, res) => {
+    console.log(req.body)
+    const { selectedIds } = req.body
+
+    selectedIds.forEach(async (id) => {
+        await TransactionSchema.findByIdAndDelete(id)
+    })
+
+    res.status(200).json({ message: 'Transactions Deleted' });
+}

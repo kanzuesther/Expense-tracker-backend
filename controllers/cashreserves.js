@@ -70,3 +70,13 @@ exports.updateCashReserve = async (req, res) => {
         res.status(500).json({ error: 'Failed to update cash reserve', details: error.message });
     }
 }
+exports.deleteCashReserve = async (req, res) => {
+    console.log(req.body)
+    const { selectedIds } = req.body
+
+    selectedIds.forEach(async (id) => {
+        await CashReservesSchema.findByIdAndDelete(id)
+    })
+
+    res.status(200).json({ message: 'CashReserve Deleted' });
+}
