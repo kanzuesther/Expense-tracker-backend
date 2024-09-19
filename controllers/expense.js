@@ -89,3 +89,42 @@ exports.deleteExpenses= async (req, res) => {
 
     res.status(200).json({ message: 'Transactions Deleted' });
 }
+
+exports.editExpense = async (req, res) => {
+    const { id } = req.params;
+    const { title, sourceAccount, type, amount, category, description, date } = req.body;
+    console.log("Edit debugging",id)
+    try {
+        const expense = await TransactionSchema.findById(id);
+        if (!expense) {
+            return res.status(404).json({ message: 'Expense not found' });
+        }
+
+        // Adjust balance of sourceAccount if amount or type is changed
+        if (expense.amount !== amount || expense.type !== type) {
+            const sourceAcc = await CashReserveSchema.findById(expense.sourceAccount);
+            // Reverse old transaction effect
+            sourceAcc.balance += (expense.type === 'income' ? -1 : 1) * expense.amount;
+            // Apply new transaction effect
+            sourceAcc.balance += (type === 'income' ? 1 : -1) * amount;
+            await sourceAcc.save();
+        }
+
+        // Update expense fields
+        expense.title = title || expense.title;
+        expense.sourceAccount = sourceAccount || expense.sourceAccount;
+        expense.type = type || expense.type;
+        expense.amount = amount || expense.amount;
+        expense.category = category || expense.category;
+        expense.description = description || expense.description;
+        expense.date = date || expense.date;
+
+        const updatedExpense = await expense.save();
+        await updatedExpense.populate("sourceAccount")
+        await updatedExpense.populate("category");
+
+        res.status(200).json({ message: 'Expense Updated', data: updatedExpense });
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error', error: error.toString() });
+    }
+};
