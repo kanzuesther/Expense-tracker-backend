@@ -28,6 +28,19 @@ router.post('/signup', async (req, res) => {
     return res.json({ status: true, message: "Account created successfully !!!" })
 
 })
+
+router.get('/users', async (req, res) => {
+    try {
+        const user = await User.find().sort({ createdAt: -1 })
+        res.status(200).json(user)
+
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.toString() })
+
+    }
+})
+
+
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username })
