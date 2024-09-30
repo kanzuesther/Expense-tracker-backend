@@ -2,8 +2,6 @@ const TransactionSchema = require("../models/TransactionModel")
 const CashReserveSchema = require("../models/CashReservesModel")
 
 
-
-
 exports.addExpense = async (req, res) => {
     console.log(req.body)
     const { title, sourceAccount, type, amount, category, description, date } = req.body

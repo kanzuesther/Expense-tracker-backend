@@ -8,6 +8,17 @@ const userSchema = new mongoose.Schema({
 
 })
 
+userSchema.methods.getUserObjectWithoutHash = function () {
+    const user = this;
+  
+    return {
+      _id: user._id,
+      email: user.email,
+      dob: user.dob,
+      gender: user.gender
+    };
+  };
+
 const UserModel = mongoose.model("User",userSchema)
 
 module.exports = { User: UserModel };

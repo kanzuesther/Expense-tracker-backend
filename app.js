@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const { readdirSync } = require('fs');
 const UserRouter = require('./routes/users.js');
 const db = require('./db/db.js');
+const { getUserFromToken, loginRequired } = require('./middlewares/auth.js');
 
 dotenv.config();
 
@@ -20,8 +21,10 @@ app.use(cors({
     origin:["http://localhost:5173"],
     credentials:true
 }))
-app.use('/auth',UserRouter)
+app.use('/auth',UserRouter);
+app.use(getUserFromToken);
 
+app.use('/api/v1/', loginRequired);
 //routes
 readdirSync('./routes').map((route) => {
     app.use('/api/v1/', require('./routes/' + route)) 
