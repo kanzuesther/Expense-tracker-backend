@@ -30,7 +30,7 @@ exports.addExpense = async (req, res) => {
                 console.log("Expense saved successfully, data");
                 console.log(data);
 
-                const sourceAccount = await CashReserveSchema.findById(expense.sourceAccount);
+                const sourceAccount = await CashReserveSchema?.findById(expense.sourceAccount);
                 sourceAccount.balance += (expense.type === 'income' ? 1 : -1) * expense.amount;
                 await sourceAccount.save();
 
