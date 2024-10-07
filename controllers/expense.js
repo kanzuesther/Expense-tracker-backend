@@ -2,10 +2,7 @@ const TransactionSchema = require("../models/TransactionModel")
 const CashReserveSchema = require("../models/CashReservesModel")
 
 
-
-
 exports.addExpense = async (req, res) => {
-    console.log(req.body)
     const { title, sourceAccount, type, amount, category, description, date } = req.body
 
     const expense = TransactionSchema({
@@ -54,12 +51,18 @@ exports.addExpense = async (req, res) => {
 
 exports.getExpense = async (req, res) => {
     try {
-        const expense = await TransactionSchema.find().sort({ createdAt: -1 }).populate('sourceAccount').populate('category')
+        let expense = await TransactionSchema.find()
+        .sort({ createdAt: -1 }).populate('sourceAccount').populate('category')
+
+        expense = expense.filter((e) => {
+            return e?.sourceAccount?.user.toString() == req.user._id;
+        });
+
         res.status(200).json(expense)
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Server error', error: error.toString() })
-
     }
 }
 

@@ -1,9 +1,7 @@
 const BudgetSchema = require("../models/BudgetModel")
 
-exports.addBudget = async (req, res) => {
-    console.log(req.body)
-    const { amount, currency, cycle, name, account, category } = req.body
-
+exports.addBudget= async (req, res) => {
+    const { amount, currency, cycle, name,account ,category} = req.body
     const budget = BudgetSchema({
         name,
         amount,
@@ -27,7 +25,12 @@ exports.addBudget = async (req, res) => {
 
 exports.getBudget = async (req, res) => {
     try {
-        const budget = await BudgetSchema.find().sort({ createdAt: -1 }).populate('account').populate('category')
+        let budget = await BudgetSchema.find().sort({ createdAt: -1 }).populate('account').populate('category')
+        
+        budget = budget.filter((e) => {
+            return e?.account?.user.toString() == req.user._id;
+        });
+        
         res.status(200).json(budget)
 
     } catch (error) {
