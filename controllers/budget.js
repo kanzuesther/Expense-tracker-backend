@@ -2,22 +2,21 @@ const BudgetSchema = require("../models/BudgetModel")
 
 exports.addBudget= async (req, res) => {
     const { amount, currency, cycle, name,account ,category} = req.body
-
     const budget = BudgetSchema({
         name,
         amount,
         currency,
-        cycle, 
-        account, 
+        cycle,
+        account,
         category
     })
     try {
         // validations
-        if (!name || !amount || !currency || !cycle||!account){
+        if (!name || !amount || !currency || !cycle || !account) {
             return res.status(400).json({ message: 'All fields are required!' })
         }
-       await budget.save();
-       res.status(200).json({"message":"budget added sucessfully","data":budget})
+        await budget.save();
+        res.status(200).json({ "message": "budget added sucessfully", "data": budget })
     } catch (error) {
         res.status(500).json({ message: error.toString() })
 
@@ -50,4 +49,14 @@ exports.deleteBudget = async (req, res) => {
         .catch((error) => {
             res.status(500).json({ message: 'Budget Error', error: error.toString() })
         })
+}
+exports.deleteBudgets = async (req, res) => {
+    console.log(req.body)
+    const { selectedIds } = req.body
+
+    selectedIds.forEach(async (id) => {
+        await BudgetSchema.findByIdAndDelete(id)
+    })
+
+    res.status(200).json({ message: 'Budgets Deleted' });
 }
