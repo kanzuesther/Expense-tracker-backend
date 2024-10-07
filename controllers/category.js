@@ -44,7 +44,6 @@ var upload = multer({
 
 
 exports.addCategory= async (req, res) => {
-    console.log(req.body)
     const { parent,icon, name, color} = req.body
 
     const category = CategorySchema({
@@ -52,6 +51,7 @@ exports.addCategory= async (req, res) => {
         parent,
         icon,
         color,
+        createdBy: req.user._id
     })
     try {
         //validations

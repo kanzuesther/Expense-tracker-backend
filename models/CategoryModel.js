@@ -36,6 +36,11 @@ const CategorySchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: "User"
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Category', CategorySchema);

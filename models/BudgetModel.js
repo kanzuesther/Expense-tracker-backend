@@ -45,7 +45,7 @@ const BudgetSchema = new mongoose.Schema({
     is_deleted: {
         type: Boolean,
         default: false,
-    },
+    }
 }, { timestamps: true }
 )
 

@@ -8,7 +8,7 @@ const CashReservesSchema = new mongoose.Schema({
         trim: true,
         maxlength: 50
     },
-    balance:{
+    balance: {
         type: Number,
         required: true
     },
@@ -39,6 +39,11 @@ const CashReservesSchema = new mongoose.Schema({
         type: Boolean,
         default: false,  // Default value is false
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
+    }
 }, { timestamps: true }
 )
 

@@ -1,7 +1,6 @@
 const CashReservesSchema = require("../models/CashReservesModel")
 
 exports.addCashReserves = async (req, res) => {
-    console.log(req.body)
     const { balance, currency, name, color, icon, createDate, lastUpdate } = req.body
 
     const cashreserves = CashReservesSchema({
@@ -11,7 +10,8 @@ exports.addCashReserves = async (req, res) => {
         color,
         icon,
         createDate,
-        lastUpdate
+        lastUpdate,
+        user: req.user._id
     })
     try {
         //validations
@@ -28,7 +28,7 @@ exports.addCashReserves = async (req, res) => {
 
 exports.getCashReserves = async (req, res) => {
     try {
-        const cashreserves = await CashReservesSchema.find().sort({ createdAt: -1 })
+        const cashreserves = await CashReservesSchema.find({ user:req.user._id }).sort({ createdAt: -1 })
         res.status(200).json(cashreserves)
 
     } catch (error) {

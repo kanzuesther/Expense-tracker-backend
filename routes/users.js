@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: "Invalid password try again !!!" })
     }
 
-    const token = jwt.sign({ username: user.username }, KEY, { expiresIn: '1hr' })
+    const token = jwt.sign({ ...user.getUserObjectWithoutHash() }, KEY, { expiresIn: '30days' })
     res.cookie('token', token, { httpOnly: true, maxAge: 36000 })
     return res.json({ message: "login successfully", data: {...user.getUserObjectWithoutHash(), token} })
 })

@@ -30,7 +30,6 @@ const STATUS_CODES = {
 const KEY = process.env.KEY || "jwttokenkey";
 
 async function getUserFromToken(req, res, next) {
-    console.log(`In getUserFromToken, headers: `, req.headers);
     if (
         req?.headers &&
         req?.headers.authorization &&
@@ -53,12 +52,10 @@ async function getUserFromToken(req, res, next) {
 };
 
 const loginRequired = async (req, res, next) => {
-    // await getUserFromToken();
-
     if (req?.user) {
         next();
     } else {
-        return res.status(STATUS_CODES.FORBIDDEN).json({message: "You are not logged in"});
+        return res.status(STATUS_CODES.UNAUTHORIZED).json({message: "You are not logged in"});
     }
 }
 

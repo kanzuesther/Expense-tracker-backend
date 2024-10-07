@@ -15,7 +15,8 @@ userSchema.methods.getUserObjectWithoutHash = function () {
       _id: user._id,
       email: user.email,
       dob: user.dob,
-      gender: user.gender
+      gender: user.gender,
+      username: user.username
     };
   };
 

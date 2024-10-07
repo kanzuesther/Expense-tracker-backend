@@ -38,7 +38,12 @@ exports.addReminder = async (req, res) => {
 
 exports.getReminder = async (req, res) => {
     try {
-        const reminder = await ReminderSchema.find().sort({ createdAt: -1 }).populate('cash_reserve')
+        let reminder = await ReminderSchema.find().sort({ createdAt: -1 }).populate('cash_reserve')
+
+        reminder = reminder.filter((e) => {
+            return e?.cash_reserve?.user.toString() == req.user._id;
+        });
+
         res.status(200).json(reminder)
 
     } catch (error) {
