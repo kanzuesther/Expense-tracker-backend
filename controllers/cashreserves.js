@@ -1,5 +1,32 @@
 const CashReservesSchema = require("../models/CashReservesModel")
 
+async function getTotalExpenseForCashReserve(cashReserveId) {
+    try {
+        const total = await Transaction.aggregate([
+            {
+                $match: {
+                    sourceAccount: mongoose.Types.ObjectId(cashReserveId), // Match the specific CashReserves source account
+                    type: 'expense', // Only consider expenses
+                    is_deleted: false // Ensure that deleted transactions are excluded
+                }
+            },
+            {
+                $group: {
+                    _id: null, // Group all records together
+                    totalAmount: { $sum: "$amount" } // Sum the amounts of all matching transactions
+                }
+            }
+        ]);
+
+        // Return the total amount or 0 if no records are found
+        return total.length > 0 ? total[0].totalAmount : 0;
+    } catch (error) {
+        console.error('Error fetching total expense:', error);
+        throw error;
+    }
+}
+
+
 exports.addCashReserves = async (req, res) => {
     const { balance, currency, name, color, icon, createDate, lastUpdate } = req.body
 

@@ -31,8 +31,8 @@ readdirSync('./routes').map((route) => {
 })
 
 console.log(`Mongo url: ${process.env.MONGO_URL}`)
-mongoose.connect(process.env.MONGO_URL)
-
-app.listen(PORT,()=>{
-    console.log(`Server is running ${PORT}`)
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    app.listen(PORT,()=>{
+        console.log(`Server is running ${PORT}`)
+    })    
 })
